@@ -1,13 +1,15 @@
-Heroku Buildpack for Node.js
-============================
+# Legitco's Heroku Buildpack for Node.js
 
-This is the official [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Node.js apps. If you fork this repository, please **update this README** to explain what your fork does and why it's special.
+This is a fork the official
+[Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Node.js
+apps. This fork adds grunt and bower support (simular to
+[mbuchetics's fork](https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt)).
 
 
 How it Works
 ------------
 
-Here's an overview of what this buildpack does:
+Here's an overview of what this buildpack does (Legitoco additions are higlighted with **NEW**):
 
 - Uses the [semver.io](https://semver.io) webservice to find the latest version of node that satisfies the [engines.node semver range](https://npmjs.org/doc/json.html#engines) in your package.json.
 - Allows any recent version of node to be used, including [pre-release versions](https://semver.io/node.json).

@@ -20,11 +20,13 @@ Here's an overview of what this buildpack does (Legitoco additions are higlighte
 - Caches the `node_modules` directory across builds for fast deploys.
 - Doesn't use the cache if `node_modules` is checked into version control.
 - Runs `npm rebuild` if `node_modules` is checked into version control.
-- Always runs `npm install` to ensure [npm script hooks](https://npmjs.org/doc/misc/npm-scripts.html) are executed.
 - Always runs `npm prune` after restoring cached modules to ensure cleanup of unused dependencies.
+- Always runs `npm install` to ensure [npm script hooks](https://npmjs.org/doc/misc/npm-scripts.html) are executed. (**NEW** without --production)
+- **NEW** runs `bower install` if there is a `bower.json` file
+- **NEW** runs `grunt heroku:$NODE_ENV` if there is a grunt file (`grunt.js`, `Gruntfile.js`, or `Gruntfile.coffee`)
+- **NEW** runs `npm prune --production` to remove development dependencies before deployment
 
-For more technical details, see the [heavily-commented compile script](https://github.com/heroku/heroku-buildpack-nodejs/blob/master/bin/compile).
-
+For more technical details, see the [heavily-commented compile script](https://github.com/legitco/heroku-buildpack-nodejs/blob/legitco/bin/compile).
 
 Documentation
 -------------

@@ -147,6 +147,16 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
     export_env_dir $env_dir
   fi
 
+  # Bower
+  if [ -f $build_dir/bower.json ]; then
+    # Install bower
+    npm install bower
+    status "Found bower.json, running bower install"
+    $build_dir/node_modules/.bin/bower install
+  else
+    status "No bower.json found"
+  fi
+
   # Grunt (borrowed from mbuchetics' repo: https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt )
   if [ -f $build_dir/grunt.js ] || [ -f $build_dir/Gruntfile.js ] || [ -f $build_dir/Gruntfile.coffee ]; then
     # make sure that grunt and grunt-cli are installed locally
@@ -156,16 +166,6 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
     $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV
   else
     status "No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
-  fi
-
-  # Bower
-  if [ -f $build_dir/bower.json ]; then
-    # Install bower
-    npm install bower
-    status "Found bower.json, running bower install"
-    $build_dir/node_modules/.bin/bower install
-  else
-    status "No bower.json found"
   fi
 
   status "Removing development dependencies"
